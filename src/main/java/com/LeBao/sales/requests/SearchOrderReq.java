@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchOrderReq {
-    private Long id;
+    private String id;
     private int page;
 }

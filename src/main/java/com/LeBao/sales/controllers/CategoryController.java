@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
+@RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping
     public ResponseEntity<List<Category>> loadAllCats() {

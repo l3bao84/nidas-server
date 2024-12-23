@@ -25,12 +25,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order o where o.paymentStatus = :paymentId")
     Optional<Order> findByPaymentStatus(@Param("paymentId") String paymentId);
 
-    @Query("select o from Order o where o.orderDate >= :fromDate and o.orderDate <= :toDate")
+    @Query("select o from Order o where o.orderStatus = 'COMPLETED' and o.orderDate >= :fromDate and o.orderDate <= :toDate")
     List<Order> findCompletedOnDateRange(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
 
     @Query("select o from Order o")
     Page<Order> getAll(Pageable pageable);
 
-    @Query("select o from Order o where o.orderId = :id")
-    Page<Order> search(Pageable pageable, @Param("id") Long id);
+    @Query("select o from Order o where o.orderStatus like %:id%")
+    Page<Order> search(Pageable pageable, @Param("id") String id);
 }

@@ -3,6 +3,7 @@ package com.LeBao.sales.services;
 import com.LeBao.sales.entities.Category;
 import com.LeBao.sales.entities.Product;
 import com.LeBao.sales.repositories.CategoryRepository;
+import com.LeBao.sales.repositories.OrderDetailRepository;
 import com.LeBao.sales.repositories.ProductRepository;
 import com.LeBao.sales.requests.ProReq;
 import com.LeBao.sales.requests.SearchProReq;
@@ -28,6 +29,8 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
 
     private final StorageService service;
+
+    private final OrderDetailRepository orderDetailRepository;
 
     public ProductResponse getProduct(Long productId) {
         if(productRepository.findById(productId).isPresent()) {
@@ -60,15 +63,7 @@ public class ProductService {
     }
 
     public List<Product> getTopPickProducts() {
-        List<Product> products = productRepository.findAll();
-        List<Product> toppickProducts = new ArrayList<>();
-        Random random = new Random();
-        for(int i = 0; i <= 3; i++) {
-            int randomPosition = random.nextInt(products.size());
-            toppickProducts.add(products.get(randomPosition));
-            products.remove(randomPosition);
-        }
-        return toppickProducts;
+        return orderDetailRepository.getTopPicksProduct();
     }
 
     public Page<Product> getAll(SearchProReq req) {

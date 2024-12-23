@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     public Page<Order> getAll(SearchOrderReq req) {
         int pageSize = 10;
         Pageable pageable = PageRequest.of(req.getPage() - 1, pageSize);
-        return DataUtils.isNullOrZero(req.getId()) ? orderRepository.getAll(pageable) : orderRepository.search(pageable, req.getId());
+        return DataUtils.isNullOrEmpty(req.getId()) ? orderRepository.getAll(pageable) : orderRepository.search(pageable, req.getId());
     }
 
     @Override

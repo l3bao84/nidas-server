@@ -40,6 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/authenticate","/img/**").permitAll()
                         .requestMatchers("/product/topPicks", "/product/recommendations", "/product/{id}").permitAll()
                         .requestMatchers("/category", "/category/{id}","/category/quickLinks").permitAll()
+                        .requestMatchers("/https://www.facebook.com/*").permitAll()
                         .requestMatchers("/search").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reviews/{productId}").permitAll()

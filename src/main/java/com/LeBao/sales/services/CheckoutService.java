@@ -82,9 +82,10 @@ public class CheckoutService {
         Optional<Order> optionalOrder = orderRepository.findByPaymentStatus(request.getPaymentId());
         if(optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            order.setPaymentStatus("PayPal");
+
             Payment payment = payPalService.executePayment(request.getPaymentId(), request.getPayerId());
             if (payment.getState().equals("approved")) {
+                order.setPaymentStatus("PayPal");
                 orderRepository.save(order);
                 emailService.sendEmail(order);
                 response = DataResponse.builder()
@@ -93,6 +94,8 @@ public class CheckoutService {
                         .build();
             }
         }
+
         return response;
     }
+
 }

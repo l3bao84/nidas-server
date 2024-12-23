@@ -48,7 +48,7 @@ public class CategoryService {
         allCats.remove(0);
         List<Category> randomCat = new ArrayList<>();
         Random random = new Random();
-        for(int i = 0; i <= 3; i++) {
+        for(int i = 0; i <= 6; i++) {
             int randomPosition = random.nextInt(allCats.size());
             randomCat.add(allCats.get(randomPosition));
             allCats.remove(randomPosition);

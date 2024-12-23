@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     @Query("select new com.LeBao.sales.DTO.PersonalInfoDTO(concat(u.firstName,' ',u.lastName), u.email,  " +
-            "(select count(o) from Order o where o.user.userId = u.userId group by o.user.userId)) " +
+            "(select count(o) from Order o where o.user.userId = u.userId and o.orderStatus = 'DELIVERING' group by o.user.userId)) " +
             "from User u where u.email = :email")
     PersonalInfoDTO getPersonalInfo(@Param("email") String email);
 }
